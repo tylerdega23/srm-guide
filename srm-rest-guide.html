@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRM Rest Requirements Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.8;
+      font-size: 18px;
+      color: #333;
+      background-color: #f4f4f4;
+      padding: 30px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      font-size: 32px;
+      color: #5E491C;
+    }
+    h2 {
+      font-size: 28px;
+      color: #5E491C;
+    }
+    h3 {
+      font-size: 24px;
+      color: #5E491C;
+    }
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #e0e0e0;
+      height: 8px;
+      z-index: 1000;
+    }
+    .progress-bar {
+      height: 8px;
+      background-color: #5E491C;
+      width: 0%;
+    }
+    .step-label {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      background: #5E491C;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 16px;
+      z-index: 1000;
+    }
+    .info-box {
+      background-color: #fdf7ed;
+      border-left: 6px solid #5E491C;
+      margin: 25px 0;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    .case-study {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 25px 0;
+    }
+    .step {
+      transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
+      transform: scale(0.75); box-shadow: none; z-index: 1;
+      opacity: 0.5;
+    }
+    .step.active {
+      transform: scale(1.25); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); z-index: 2;
+      opacity: 1;
+    }
+    .case-study img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+    ul {
+      padding-left: 25px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 12px 18px;
+      background-color: #FFC600;
+      color: #5E491C;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      display: none;
+    }
+    .back-to-top:hover {
+      background-color: #ffda66;
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-container">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+<div style="text-align: center; background: #fffaf0; padding: 10px 0; position: fixed; top: 8px; width: 100%; z-index: 999; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+  <button onclick="navigateStep(-1)" style="margin: 0 10px; padding: 10px 24px; font-size: 16px; background-color: #5E491C; color: #fff; border: 2px solid #FFC600; border-radius: 6px; cursor: pointer; transition: background-color 0.3s, transform 0.2s;">Previous</button>
+  <button onclick="navigateStep(1)" style="margin: 0 10px; padding: 10px 24px; font-size: 16px; background-color: #5E491C; color: #fff; border: 2px solid #FFC600; border-radius: 6px; cursor: pointer; transition: background-color 0.3s, transform 0.2s;">Next</button>
+</div>
+</div>
+<div style="text-align: center; background: #f4f4f4; padding: 8px 0; position: fixed; top: 8px; width: 100%; z-index: 999;">
+  <button onclick="navigateStep(-1)" style="margin: 0 10px; padding: 10px 20px; font-size: 16px;">Previous</button>
+  <button onclick="navigateStep(1)" style="margin: 0 10px; padding: 10px 20px; font-size: 16px;">Next</button>
+</div>
+  </div>
+  <div class="step-label" id="stepLabel">Step 1: Review Segment Duty Periods</div>
+
+  <h1>SRM Rest Requirements Guide</h1>
+  <div class="info-box">
+    <h2>SRM Case Study: Establishing Look-Back Window & Rest Level</h2>
+    <p>This case study walks through a real-world example using JCT screenshots to illustrate how to determine the 24-hour look-back window, calculate total flight time, and apply CFR 121.471 rest level requirements.</p>
+  </div>
+
+  <div class="case-study" style="max-width: 1000px; margin: 0 auto; position: relative; z-index: 0;">
+    <div class="step active" style="margin-bottom: 120px;" data-step="Step 1: Review Segment Duty Periods">
+      <h3>Step 1: Review Segment Duty Periods</h3>
+      <img src="https://upsinc.sharepoint.com/sites/wiki_Wiki3.0/Pictures%20%20FAR/Domestic/SRM/SRM_Case1/SRM_Case1.1.PNG" alt="JCT Segment Breakdown">
+      <p>We begin by identifying a crewmember’s two consecutive segments. The JCT tracking view shows rest between segments and key times like block, report, and release.</p>
+    </div>
+
+    <div class="step" data-step="Step 2: Identify Look-Back Timeline">
+      <h3>Step 2: Identify the Look-Back Window Timeline</h3>
+      <img src="https://upsinc.sharepoint.com/sites/wiki_Wiki3.0/Pictures%20%20FAR/Domestic/SRM/SRM_Case1/SRM_Case1.2.PNG" alt="JCT Timeline Only">
+      <p>Using the block-in time of the SDF–CLT segment (09:53z/8z), we count backward 24 hours to 09:53z/7z. This becomes our official look-back window.</p>
+    </div>
+
+    <div class="step" data-step="Step 3: Evaluate Rest">
+      <h3>Step 3: Evaluate Rest in the Look-Back Window</h3>
+      <img src="https://upsinc.sharepoint.com/sites/wiki_Wiki3.0/Pictures%20%20FAR/Domestic/SRM/SRM_Case1/SRM_Case1.3.PNG" alt="Rest Within 24-Hour Window">
+      <p>JCT shows that the crewmember was off duty beginning at 07:47z/8z, and our look-back window starts at 09:53z/7z.</p>
+      <p><strong>Rest Calculation:</strong></p>
+      <ul>
+        <li>Look-back window: 09:53z/7z → 09:53z/8z</li>
+        <li>Off-duty start: 07:47z/8z</li>
+        <li>Rest = 09:53z/8z - 09:53z/7z = 24:00, minus duty ending at 07:47z/8z → 21:54 rest</li>
+      </ul>
+      <p>This exceeds the minimum required Scheduled Rest. Therefore, the crewmember is <strong>not</strong> in a reduced rest period and does <strong>not</strong> require Mandatory Rest.</p>
+    </div>
+
+    <div class="step" data-step="Step 4: Total Flight Time">
+      <h3>Step 4: Calculate Total Flight Time in Window</h3>
+      <img src="https://upsinc.sharepoint.com/sites/wiki_Wiki3.0/Pictures%20%20FAR/Domestic/SRM/SRM_Case1/SRM_Case1.4.gif" alt="Total Flight Time Screenshot">
+      <p>The only flight falling inside this 24-hour window is UPS 6286 with 1:06 block time. This determines the required rest level category.</p>
+    </div>
+
+    <div class="step" data-step="Step 5: Apply Rest Matrix">
+      <h3>Step 5: Apply to SRM Rest Matrix</h3>
+      <img src="https://upsinc.sharepoint.com/sites/wiki_Wiki3.0/Pictures%20%20FAR/Domestic/SRM/SRM_Case1/SRM_Case1.5.PNG" alt="SRM Rest Matrix">
+      <p>According to the matrix, 1:06 of flight time falls into <strong>Level 1 Rest</strong>:</p>
+      <ul>
+        <li>Scheduled Rest: 9 hrs</li>
+        <li>Reduced Rest: 8 hrs</li>
+        <li>Mandatory Rest: 10 hrs (if reduced rest taken)</li>
+      </ul>
+      <p><strong>Important:</strong> If the crewmember had received only 8 hours of rest, this would qualify as <em>Reduced Rest</em>. In that case, Mandatory Rest of 10 hours must begin <strong>within 24 hours</strong> of the start of the reduced rest period (i.e., no later than 07:47z/9z).</p>
+    </div>
+
+    <div class="step" data-step="Final Review">
+      <h3>Final Review:</h3>
+      <p>The crewmember’s rest of 21:54 in this scenario clearly exceeds the 9-hour scheduled minimum. No Mandatory Rest is needed, and the flight segment is CFR compliant.</p>
+    </div>
+  </div>
+
+  <script>
+  let currentIndex = 0;
+  const steps = document.querySelectorAll('.step');
+  const stepLabel = document.getElementById('stepLabel');
+  const progressBar = document.getElementById('progressBar');
+
+  function updateActiveStep(index) {
+    steps.forEach((step, i) => {
+      if (i === index) {
+        step.classList.add('active');
+        stepLabel.textContent = step.getAttribute('data-step');
+      } else {
+        step.classList.remove('active');
+      }
+    });
+  }
+
+  function navigateStep(direction) {
+    currentIndex += direction;
+    currentIndex = Math.max(0, Math.min(currentIndex, steps.length - 1));
+    updateActiveStep(currentIndex);
+    steps[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Initial load
+  updateActiveStep(currentIndex);
+
+  // Optional hover effect
+  steps.forEach((step, index) => {
+    step.addEventListener('mouseenter', () => {
+      steps.forEach(s => s.classList.remove('active'));
+      step.classList.add('active');
+      stepLabel.textContent = step.getAttribute('data-step');
+      currentIndex = index;
+    });
+  });
+
+  // Remove scroll behavior
+  window.removeEventListener('scroll', () => {});
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    progressBar.style.width = progress + '%';
+  });
+</script>
+  
+  <button class="back-to-top" id="backToTop">Top</button>
+
+<script>
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    progressBar.style.width = progress + '%';
+
+    // Show/hide back to top button
+    if (scrollTop > 300) {
+      backToTopBtn.style.display = 'block';
+    } else {
+      backToTopBtn.style.display = 'none';
+    }
+  });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    currentIndex = 0;
+    updateActiveStep(currentIndex);
+  });
+</script>
+</body>
+</html>
